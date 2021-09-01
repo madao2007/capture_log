@@ -1,16 +1,19 @@
 
+import csv
 
 
 
-def device_login(host, user, password, enable_password):
+def device_login():
     pass
 
+def device_cmd_execute():
+    pass
+
+def save_output_to_file():
+    pass
 
 def main():
-    enable_password = ""
-    device_login(host, user, password, enable_password)
-
-
+    pass
 
 if __name__ == "__main()__":
     main()
