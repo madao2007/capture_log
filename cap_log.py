@@ -44,7 +44,7 @@ def capture_log(device_info):
         connection.send(command[0])
         connection.send('\n')
         print(command[0])
-        time.sleep(5)
+        time.sleep(1)
         file_output = connection.recv(9999999).decode(encoding='utf-8')
         device_outputs += file_output
     curret_date = datetime.today().strftime('%Y-%m-%d')
