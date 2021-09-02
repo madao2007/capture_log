@@ -1,0 +1,9 @@
+terminal length 0
+show cdp neighbor
+show run
+show version
+show ip route
+show vrf
+show interface 
+show ip interface
+show ip interface brief
