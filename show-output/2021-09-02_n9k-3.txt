@@ -1,0 +1,564 @@
+
+terminal length 0
+Cisco NX-OS Software
+Copyright (c) 2002-2020, Cisco Systems, Inc. All rights reserved.
+Nexus 9000v software ("Nexus 9000v Software") and related documentation,
+files or other reference materials ("Documentation") are
+the proprietary property and confidential information of Cisco
+Systems, Inc. ("Cisco") and are protected, without limitation,
+pursuant to United States and International copyright and trademark
+laws in the applicable jurisdiction which provide civil and criminal
+penalties for copying or distribution without Cisco's authorization.
+
+Any use or disclosure, in whole or in part, of the Nexus 9000v Software
+or Documentation to any third party for any purposes is expressly
+prohibited except as otherwise authorized by Cisco in writing.
+The copyrights to certain works contained herein are owned by other
+third parties and are used and distributed under license. Some parts
+of this software may be covered under the GNU Public License or the
+GNU Lesser General Public License. A copy of each such license is
+available at
+http://www.gnu.org/licenses/gpl.html and
+http://www.gnu.org/licenses/lgpl.html
+***************************************************************************
+*  Nexus 9000v is strictly limited to use for evaluation, demonstration   *
+*  and NX-OS education. Any use or disclosure, in whole or in part of     *
+*  the Nexus 9000v Software or Documentation to any third party for any   *
+*  purposes is expressly prohibited except as otherwise authorized by     *
+*  Cisco in writing.                                                      *
+***************************************************************************
+n9k-3# terminal length 0
+n9k-3# show cdp neighbor
+Capability Codes: R - Router, T - Trans-Bridge, B - Source-Route-Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater,
+                  V - VoIP-Phone, D - Remotely-Managed-Device,
+                  s - Supports-STP-Dispute
+
+Device-ID          Local Intrfce  Hldtme Capability  Platform      Port ID
+n9k-1(96E8JCD20VK)
+                    mgmt0          173    R S s     N9K-C9500v    mgmt0         
+n9k-2(9E9XZWUQS30)
+                    mgmt0          124    R S s     N9K-C9500v    mgmt0         
+ios-1.cisco.com     mgmt0          170    R B                     Gig0/0        
+
+Total entries displayed: 3
+n9k-3# show run
+
+!Command: show running-config
+!Running configuration last done at: Fri Aug 27 06:49:31 2021
+!Time: Thu Sep  2 12:06:06 2021
+
+version 9.3(6) Bios:version  
+hostname n9k-3
+vdc n9k-3 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature nxapi
+feature lldp
+
+no password strength-check
+username admin password 5 $5$PHMFJK$L3xRi7sURsGYz9LiTqQZP5D8vsOdUohB4B.HUfM1/V7  role network-admin
+username cisco password 5 $5$BKCDMM$Qkp3ibySytbOgn6FpCerYQvbsWAVLhe7j4Dx.lVtmu/  role network-admin
+username cisco passphrase  lifetime 99999 warntime 14 gracetime 3
+ip domain-lookup
+copp profile strict
+snmp-server user admin network-admin auth md5 0x587b04bd5e51997043c7b2887667d087 priv 0x587b04bd5e51997043c7b2887667d087 localizedkey
+snmp-server user cisco network-admin auth md5 0x587b04bd5e51997043c7b2887667d087 priv 0x587b04bd5e51997043c7b2887667d087 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1
+
+vrf context management
+  ip route 0.0.0.0/0 100.100.1.1
+
+interface Ethernet1/1
+
+interface Ethernet1/2
+
+interface Ethernet1/3
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+  no shutdown
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  vrf member management
+  ip address 100.100.1.103/24
+icam monitor scale
+
+line console
+line vty
+boot nxos bootflash:/nxos.9.3.6.bin sup-1
+
+logging server 2.2.2.2
+logging server 3.3.3.3
+logging server 4.4.4.4
+logging server 5.5.5.5
+logging server 6.6.6.6
+logging server 7.7.7.7
+logging server 8.8.8.8
+
+
+n9k-3# show ip interface
+
+IP Interface Status for VRF "default"
+n9k-3# show version
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Documents: http://www.cisco.com/en/US/products/ps9372/tsd_products_support_series_home.html
+Copyright (c) 2002-2020, Cisco Systems, Inc. All rights reserved.
+The copyrights to certain works contained herein are owned by
+other third parties and are used and distributed under license.
+Some parts of this software are covered under the GNU Public
+License. A copy of the license is available at
+http://www.gnu.org/licenses/gpl.html.
+
+Nexus 9000v is a demo version of the Nexus Operating System
+
+Software
+  BIOS: version 
+ NXOS: version 9.3(6)
+  BIOS compile time:  
+  NXOS image file is: bootflash:///nxos.9.3.6.bin
+  NXOS compile time:  11/9/2020 23:00:00 [11/10/2020 11:00:21]
+
+
+Hardware
+  cisco Nexus9000 C9500v Chassis ("Supervisor Module")
+  Intel(R) Xeon(R) CPU E5-2630 v3 @ 2.40GHz with 7937024 kB of memory.
+  Processor Board ID 9E9865C7R5R
+
+  Device name: n9k-3
+  bootflash:    4287040 kB
+Kernel uptime is 14 day(s), 4 hour(s), 48 minute(s), 28 second(s)
+
+Last reset 
+  Reason: Unknown
+  System version: 
+  Service: 
+
+plugin
+  Core Plugin, Ethernet Plugin
+
+Active Package(s):
+show clock
+        
+n9k-3# show clock
+Warning: No NTP peer/server configured. Time may be out of sync.
+12:06:09.710 UTC Thu Sep 02 2021
+Time source is NTP
+n9k-3# 
+terminal length 0
+Cisco NX-OS Software
+Copyright (c) 2002-2020, Cisco Systems, Inc. All rights reserved.
+Nexus 9000v software ("Nexus 9000v Software") and related documentation,
+files or other reference materials ("Documentation") are
+the proprietary property and confidential information of Cisco
+Systems, Inc. ("Cisco") and are protected, without limitation,
+pursuant to United States and International copyright and trademark
+laws in the applicable jurisdiction which provide civil and criminal
+penalties for copying or distribution without Cisco's authorization.
+
+Any use or disclosure, in whole or in part, of the Nexus 9000v Software
+or Documentation to any third party for any purposes is expressly
+prohibited except as otherwise authorized by Cisco in writing.
+The copyrights to certain works contained herein are owned by other
+third parties and are used and distributed under license. Some parts
+of this software may be covered under the GNU Public License or the
+GNU Lesser General Public License. A copy of each such license is
+available at
+http://www.gnu.org/licenses/gpl.html and
+http://www.gnu.org/licenses/lgpl.html
+***************************************************************************
+*  Nexus 9000v is strictly limited to use for evaluation, demonstration   *
+*  and NX-OS education. Any use or disclosure, in whole or in part of     *
+*  the Nexus 9000v Software or Documentation to any third party for any   *
+*  purposes is expressly prohibited except as otherwise authorized by     *
+*  Cisco in writing.                                                      *
+***************************************************************************
+n9k-3# terminal length 0
+n9k-3# show cdp neighbor
+Capability Codes: R - Router, T - Trans-Bridge, B - Source-Route-Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater,
+                  V - VoIP-Phone, D - Remotely-Managed-Device,
+                  s - Supports-STP-Dispute
+
+Device-ID          Local Intrfce  Hldtme Capability  Platform      Port ID
+n9k-1(96E8JCD20VK)
+                    mgmt0          158    R S s     N9K-C9500v    mgmt0         
+n9k-2(9E9XZWUQS30)
+                    mgmt0          169    R S s     N9K-C9500v    mgmt0         
+ios-1.cisco.com     mgmt0          144    R B                     Gig0/0        
+
+Total entries displayed: 3
+n9k-3# show run
+
+!Command: show running-config
+!Running configuration last done at: Fri Aug 27 06:49:31 2021
+!Time: Thu Sep  2 12:07:21 2021
+
+version 9.3(6) Bios:version  
+hostname n9k-3
+vdc n9k-3 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 248 maximum 248
+  limit-resource u6route-mem minimum 96 maximum 96
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature nxapi
+feature lldp
+
+no password strength-check
+username admin password 5 $5$PHMFJK$L3xRi7sURsGYz9LiTqQZP5D8vsOdUohB4B.HUfM1/V7  role network-admin
+username cisco password 5 $5$BKCDMM$Qkp3ibySytbOgn6FpCerYQvbsWAVLhe7j4Dx.lVtmu/  role network-admin
+username cisco passphrase  lifetime 99999 warntime 14 gracetime 3
+ip domain-lookup
+copp profile strict
+snmp-server user admin network-admin auth md5 0x587b04bd5e51997043c7b2887667d087 priv 0x587b04bd5e51997043c7b2887667d087 localizedkey
+snmp-server user cisco network-admin auth md5 0x587b04bd5e51997043c7b2887667d087 priv 0x587b04bd5e51997043c7b2887667d087 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1
+
+vrf context management
+  ip route 0.0.0.0/0 100.100.1.1
+
+interface Ethernet1/1
+
+interface Ethernet1/2
+
+interface Ethernet1/3
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+  no shutdown
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  vrf member management
+  ip address 100.100.1.103/24
+icam monitor scale
+
+line console
+line vty
+boot nxos bootflash:/nxos.9.3.6.bin sup-1
+
+logging server 2.2.2.2
+logging server 3.3.3.3
+logging server 4.4.4.4
+logging server 5.5.5.5
+logging server 6.6.6.6
+logging server 7.7.7.7
+logging server 8.8.8.8
+
+
+n9k-3# show ip interface
+
+IP Interface Status for VRF "default"
+n9k-3# show version
+show clock
+Cisco Nexus Operating System (NX-OS) Software
+TAC support: http://www.cisco.com/tac
+Documents: http://www.cisco.com/en/US/products/ps9372/tsd_products_support_series_home.html
+Copyright (c) 2002-2020, Cisco Systems, Inc. All rights reserved.
+The copyrights to certain works contained herein are owned by
+other third parties and are used and distributed under license.
+Some parts of this software are covered under the GNU Public
+License. A copy of the license is available at
+http://www.gnu.org/licenses/gpl.html.
+
+Nexus 9000v is a demo version of the Nexus Operating System
+
+Software
+  BIOS: version 
+ NXOS: version 9.3(6)
+  BIOS compile time:  
+  NXOS image file is: bootflash:///nxos.9.3.6.bin
+  NXOS compile time:  11/9/2020 23:00:00 [11/10/2020 11:00:21]
+
+
+Hardware
+  cisco Nexus9000 C9500v Chassis ("Supervisor Module")
+  Intel(R) Xeon(R) CPU E5-2630 v3 @ 2.40GHz with 7937024 kB of memory.
+  Processor Board ID 9E9865C7R5R
+
+  Device name: n9k-3
+  bootflash:    4287040 kB
+Kernel uptime is 14 day(s), 4 hour(s), 49 minute(s), 43 second(s)
+
+Last reset 
+  Reason: Unknown
+  System version: 
+  Service: 
+
+plugin
+  Core Plugin, Ethernet Plugin
+
+Active Package(s):
+        
+n9k-3# show clock
+Warning: No NTP peer/server configured. Time may be out of sync.
+12:07:24.638 UTC Thu Sep 02 2021
+Time source is NTP
+n9k-3# show vrf
+VRF-Name                           VRF-ID State   Reason                        
+default                                 1 Up      --                            
+management                              2 Up      --                            
+n9k-3# show bgp
+             ^
+% Invalid command at '^' marker.
+n9k-3# 
