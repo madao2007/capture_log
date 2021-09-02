@@ -53,7 +53,7 @@ def capture_log(device_info):
             host_name = file_output.split('\n')[-1].split('#')[0]
         count += 1
 
-    curret_date = datetime.today().strftime('%Y-%m-%d')
+    curret_date = datetime.today().strftime('%Y-%m-%d-%H-%M')
     file_name = curret_date + '_' + host_name
 
     save_file(file_name, device_outputs)
