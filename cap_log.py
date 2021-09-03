@@ -3,42 +3,42 @@ import paramiko
 import time
 from datetime import datetime
 
+from paramiko.ssh_exception import AuthenticationException, BadAuthenticationType, BadHostKeyException, ChannelException, NoValidConnectionsError, PasswordRequiredException, SSHException
+
 def read_file(file_name):
     with open(file_name) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         list_of_rows = list(csv_reader)
         return list_of_rows
 
+def jumpbox(jumpbox_ip, jumpbox_username, jumpbox_password, target_addr):
+    jumpbox = paramiko.SSHClient()
+    jumpbox.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    jumpbox.connect(hostname=jumpbox_ip, username=jumpbox_username, password=jumpbox_password)
+    
+    jumpbox_transport = jumpbox.get_transport()
+    dest_addr = (target_addr, 22)
+
+    jumpbox_channel = jumpbox_transport.open_channel("direct-tcpip", dest_addr)
+    
+    return jumpbox_channel
 
 def capture_log(device_info):
     host_ip = device_info[0]
     username = device_info[1]
     password = device_info[2]
-    device_type = device_info[3]
     device_outputs = ''
-    enable_password = ''
+
 
     print('Working on ' + host_ip)
     print('...')
 
-    if len(device_info) == 5 and device_type == 'ios':
-        enable_password =  device_info[4]
         
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
     ssh.connect(hostname=host_ip, port=22, username=username, password=password)
-    connection = ssh.invoke_shell()
-    if device_type == 'ios':
-        prompt_out = str(connection.recv(9999))
-        prompt_out = prompt_out.split('\n')[-1]
-        if '#' not in prompt_out:
-            connection.send("enable")
-            connection.send('\n')
-            time.sleep(1)
-            connection.send(enable_password) 
-            connection.send('\n')
 
+    connection = ssh.invoke_shell()
     command_list = read_file('command_list.csv')
     count = 0
     for command in command_list:
@@ -52,6 +52,7 @@ def capture_log(device_info):
         if count == 0:
             host_name = file_output.split('\n')[-1].split('#')[0]
         count += 1
+    ssh.close()
 
     curret_date = datetime.today().strftime('%Y-%m-%d-%H-%M')
     file_name = curret_date + '_' + host_name
@@ -67,10 +68,16 @@ def save_file(file_name, content):
 
 def main():
     device_info_list = read_file('device_list.csv')
+    failed_device_log = ''
     for device_info in device_info_list:
-        capture_log(device_info)
-        print('Done')
-        print('=' * 15)
+        try:
+            capture_log(device_info)
+            print('Done')
+            print('=' * 15)
+        except (AuthenticationException, BadAuthenticationType, ChannelException, NoValidConnectionsError, PasswordRequiredException, EOFError) as e:
+            failed_device_log = failed_device_log + str(device_info[0]) + ' ' + str(e) + '\n'           
+            pass
+    save_file('failed_log.txt', failed_device_log)
 
 if __name__ == '__main__':
     main()

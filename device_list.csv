@@ -1,4 +1,6 @@
-100.100.1.101,admin,cisco,nxos
-100.100.1.102,admin,cisco,nxos
-100.100.1.103,admin,cisco,nxos
-100.100.1.104,test,test,ios,cisco
+100.100.1.104,admin,cisco
+100.100.1.102,admin,cisco
+100.100.1.105,admin,cisco
+100.100.1.103,admin,cisco
+100.100.1.107,admin,cisco
+100.100.1.101,admin,admin

@@ -1,8 +1,2 @@
 terminal length 0
 show cdp neighbor
-show run
-show ip interface
-show version
-show clock
-show vrf
-show bgp
