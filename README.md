@@ -15,3 +15,6 @@ The latest string is 'enable' password
 python3 cap_log.py
 ```
 5. Find the logs in `show-output` folder
+
+## Note
+The 'failed_log' save in 'show-output' folder.

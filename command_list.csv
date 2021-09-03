@@ -1,2 +1,8 @@
 terminal length 0
 show cdp neighbor
+show vrf
+show run
+show interface
+show ip interface
+show ip route
+show version
