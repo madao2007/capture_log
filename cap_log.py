@@ -11,18 +11,6 @@ def read_file(file_name):
         list_of_rows = list(csv_reader)
         return list_of_rows
 
-def jumpbox(jumpbox_ip, jumpbox_username, jumpbox_password, target_addr):
-    jumpbox = paramiko.SSHClient()
-    jumpbox.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    jumpbox.connect(hostname=jumpbox_ip, username=jumpbox_username, password=jumpbox_password)
-    
-    jumpbox_transport = jumpbox.get_transport()
-    dest_addr = (target_addr, 22)
-
-    jumpbox_channel = jumpbox_transport.open_channel("direct-tcpip", dest_addr)
-    
-    return jumpbox_channel
-
 def capture_log(device_info):
     host_ip = device_info[0]
     username = device_info[1]
